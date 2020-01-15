@@ -96,6 +96,7 @@ void Game::processKeys(sf::Event t_event)
 /// <param name="t_deltaTime">time interval per frame</param>
 void Game::update(sf::Time t_deltaTime)
 {
+	m_wanderer.update(t_deltaTime);
 	m_pChar.update(t_deltaTime.asMilliseconds());
 	if (m_exitGame)
 	{
@@ -110,6 +111,7 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	m_window.clear();
+	m_wanderer.render(m_window);
 	m_pChar.render(m_window);
 	m_window.display();
 }
