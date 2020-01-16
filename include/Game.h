@@ -34,11 +34,17 @@ private:
 	
 	void setupFontAndText();
 	void setupSprite();
-
+	sf::View player_view;
+	sf::View miniMap_view;
+	sf::View default_view;
 	sf::RenderWindow m_window; // main SFML window
+	sf::RenderWindow m_minimap;
 	sf::Font m_ArialBlackfont; // font used by message
 	sf::Text m_welcomeMessage; // text used for message on screen
 	bool m_exitGame; // control exiting game
+
+
+	
 
 };
 

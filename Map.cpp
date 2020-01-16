@@ -37,21 +37,16 @@ void Map::init()
 
 }
 
-void Map::render(sf::RenderWindow& window)
+void Map::render(sf::RenderWindow& window, int i, int j)
 {
-	for (int j = 0; j < 22; j++)
-	{
-		for (int i = 0; i < 40; i++)
-		{
+	
 			if (m_mapHolder.mapDoubleArray[i][j] == 1)
 			{
 				window.draw(tile[i][j].sprite);
-				std::cout << "got here";
 			}
 			else
 			{
 				//do nothing
 			}
-		}
-	}
+		
 }

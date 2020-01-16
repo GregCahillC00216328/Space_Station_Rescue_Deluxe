@@ -98,6 +98,8 @@ void Game::update(sf::Time t_deltaTime)
 {
 	m_wanderer.update(t_deltaTime);
 	m_pChar.update(t_deltaTime.asMilliseconds());
+	player_view.setCenter(m_pChar.getPosition());
+	//m_window.setView(player_view);
 	if (m_exitGame)
 	{
 		m_window.close();
@@ -111,7 +113,23 @@ void Game::render()
 {
 	
 	m_window.clear();
-	world.render(m_window);
+	
+	for (int j = 0; j < 22; j++)
+	{
+		for (int i = 0; i < 40; i++)
+		{
+			
+			m_window.setView(player_view);
+			world.render(m_window, i, j);
+
+			m_window.setView(miniMap_view);
+			m_wanderer.render(m_window);
+			m_pChar.render(m_window);
+			world.render(m_window, i, j);
+			m_window.setView(player_view);
+			
+		}
+	}
 	m_wanderer.render(m_window);
 	m_pChar.render(m_window);
 	m_window.display();
@@ -142,6 +160,13 @@ void Game::setupFontAndText()
 /// </summary>
 void Game::setupSprite()
 {
+	//miniMap_view.reset(sf::FloatRect(zeroVector, viewSize));
+	
 	world.init();
+	miniMap_view.setSize(sf::Vector2f(m_window.getSize().x*1.8,m_window.getSize().y*2));
+	miniMap_view.setViewport(sf::FloatRect(0.75f, 0, 0.25f, 0.25f));
+	//miniMap_view.setViewport(sf::FloatRect(viewportOffset, viewportSize));
 	m_pChar.movement(sf::Vector2f(m_window.getSize().x/2,m_window.getSize().y/2));
+	default_view = sf::View(sf::FloatRect(0, 0, m_window.getSize().x, m_window.getSize().y));
+	player_view=sf::View(sf::FloatRect(0, 0, m_window.getSize().x/2.5, m_window.getSize().y/2.5));
 }
