@@ -11,6 +11,7 @@
 /// </summary>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Map.h"
 #include "Wanderer.h"
 class Game
 {
@@ -24,6 +25,7 @@ public:
 
 private:
 	Player m_pChar;
+	Map world;
 	Wanderer m_wanderer;
 	void processEvents();
 	void processKeys(sf::Event t_event);

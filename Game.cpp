@@ -109,8 +109,9 @@ void Game::update(sf::Time t_deltaTime)
 /// </summary>
 void Game::render()
 {
-	m_window.clear(sf::Color::White);
+	
 	m_window.clear();
+	world.render(m_window);
 	m_wanderer.render(m_window);
 	m_pChar.render(m_window);
 	m_window.display();
@@ -141,5 +142,6 @@ void Game::setupFontAndText()
 /// </summary>
 void Game::setupSprite()
 {
+	world.init();
 	m_pChar.movement(sf::Vector2f(m_window.getSize().x/2,m_window.getSize().y/2));
 }

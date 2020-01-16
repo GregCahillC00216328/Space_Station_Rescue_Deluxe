@@ -42,6 +42,8 @@
   <ItemGroup>
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Map.h" />
+    <ClInclude Include="include\MapHolder.h" />
+    <ClInclude Include="include\MapTIle.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Wanderer.h" />
   </ItemGroup>

@@ -60,5 +60,11 @@
     <ClInclude Include="include\Wanderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\MapHolder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MapTIle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
