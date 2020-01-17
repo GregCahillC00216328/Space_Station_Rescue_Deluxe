@@ -37,8 +37,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
+<<<<<<< Updated upstream
+=======
     <ClCompile Include="Predator.cpp" />
     <ClCompile Include="Seeker.cpp" />
+>>>>>>> Stashed changes
     <ClCompile Include="Wanderer.cpp" />
   </ItemGroup>
   <ItemGroup>
