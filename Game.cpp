@@ -17,6 +17,9 @@ Game::Game() :
 	m_window{ sf::VideoMode::getFullscreenModes()[0], "SFML window", sf::Style::Fullscreen },
 	m_exitGame{false} //when true game will exit
 {
+	m_pred.init(sf::Vector2f(0,0));
+	m_seeker.initSeeker(m_window);
+	m_wanderer.initWander(m_window);
 	setupFontAndText(); // load font 
 	setupSprite(); // load texture
 }
@@ -96,8 +99,10 @@ void Game::processKeys(sf::Event t_event)
 /// <param name="t_deltaTime">time interval per frame</param>
 void Game::update(sf::Time t_deltaTime)
 {
+	
 	m_wanderer.update(t_deltaTime);
 	m_pChar.update(t_deltaTime.asMilliseconds());
+	m_pred.update(m_pChar.getPosition(),t_deltaTime.asMilliseconds());
 	player_view.setCenter(m_pChar.getPosition());
 	//m_window.setView(player_view);
 	if (m_exitGame)
@@ -114,6 +119,21 @@ void Game::render()
 	
 	m_window.clear();
 	
+	forLoopLibrary();
+	m_window.setView(miniMap_view);
+	m_window.draw(mapSprite);
+	m_pChar.render(m_window);
+	m_window.setView(player_view);
+	m_seeker.render(m_window);
+
+	m_wanderer.render(m_window);
+	m_pChar.render(m_window);
+	m_pred.render(m_window);
+	m_window.display();
+}
+
+void Game::forLoopLibrary()
+{
 	for (int j = 0; j < 22; j++)
 	{
 		for (int i = 0; i < 40; i++)
