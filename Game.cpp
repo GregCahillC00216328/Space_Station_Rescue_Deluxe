@@ -17,9 +17,12 @@ Game::Game() :
 	m_window{ sf::VideoMode::getFullscreenModes()[0], "SFML window", sf::Style::Fullscreen },
 	m_exitGame{false} //when true game will exit
 {
+<<<<<<< Updated upstream
+=======
 	m_pred.init(sf::Vector2f(0,0));
 	m_seeker.initSeeker(m_window);
 	m_wanderer.initWander(m_window);
+>>>>>>> Stashed changes
 	setupFontAndText(); // load font 
 	setupSprite(); // load texture
 }
@@ -134,6 +137,7 @@ void Game::render()
 
 void Game::forLoopLibrary()
 {
+>>>>>>> Stashed changes
 	for (int j = 0; j < 22; j++)
 	{
 		for (int i = 0; i < 40; i++)
