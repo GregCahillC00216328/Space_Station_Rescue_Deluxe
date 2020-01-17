@@ -18,6 +18,9 @@ private:
 	sf::Vector2f m_seekerCirclePos;
 	bool chasingWorker = false;
 	sf::CircleShape m_originSeekerCheck; // used for testing purposes only
+	float caughtWorkersbySeeker;
+	sf::Vector2f m_previousSeekerPos;
+	bool hitWall = false;
 public:
 	Seeker();
 	~Seeker();
@@ -25,6 +28,8 @@ public:
 	void render(sf::RenderWindow& t_window);
 	void initSeeker(sf::RenderWindow& t_window);
 	void generateNewPoint();
-	void withinWorkerDistance(Wanderer & t_wanderer);
+	bool withinWorkerDistance(Wanderer & t_wanderer, bool t_destroyWanderer);
+	sf::Sprite getSeeker();
+	void bounce();
 };
 #endif // SEEKER

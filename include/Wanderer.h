@@ -17,15 +17,19 @@ private:
 	float screenWidth;	// used to store width of screen
 	float screenHeight;	// used to store height of screen
 	sf::CircleShape m_originWanderCheck;	// used for testing purposes only
+	sf::Vector2f m_previousWanderPos;
+	bool hitWall = false;
 public:
 	Wanderer();	//default constructor
 	~Wanderer();	//destructor
-	void update(sf::Time t_deltatime);	// update for the wander class
-	void render(sf::RenderWindow& t_window);	// render window for the wander class
+	void update(sf::Time t_deltatime, bool t_destroyWanderer);	// update for the wander class
+	void render(sf::RenderWindow& t_window, bool t_destroyWanderer);	// render window for the wander class
 	void generateNewPoint();	// creates a new point for the ship to wander to
 	void rotateToDirection();	// points wanderer in direction of movement
 	void initWander(sf::RenderWindow &t_window);	// used to initialise the wanderer
 	sf::Vector2f getPosition();
+	sf::Sprite getWanderer();
+	void bounce();
 };
 #endif // WANDERER
 

@@ -15,8 +15,11 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode::getFullscreenModes()[0], "SFML window", sf::Style::Fullscreen },
-	m_exitGame{false} //when true game will exit
+	m_exitGame{false}, //when true game will exit
+	destroyWanderer{false},
+	caughtWanderer{0}
 {
+	
 	m_seeker.initSeeker(m_window);
 	m_wanderer.initWander(m_window);
 	setupFontAndText(); // load font 
@@ -98,9 +101,10 @@ void Game::processKeys(sf::Event t_event)
 /// <param name="t_deltaTime">time interval per frame</param>
 void Game::update(sf::Time t_deltaTime)
 {
-	m_wanderer.update(t_deltaTime);
+	
+	m_wanderer.update(t_deltaTime,destroyWanderer);
 	m_seeker.update(t_deltaTime);
-	m_seeker.withinWorkerDistance(m_wanderer);
+	destroyWanderer = m_seeker.withinWorkerDistance(m_wanderer, destroyWanderer);
 	m_pChar.update(t_deltaTime.asMilliseconds());
 	player_view.setCenter(m_pChar.getPosition());
 	//m_window.setView(player_view);
@@ -108,6 +112,17 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	if (sqrt(pow((m_pChar.getPlayer().getPosition().x -m_wanderer.getWanderer().getPosition().x),2) + pow((m_pChar.getPlayer().getPosition().y - m_wanderer.getWanderer().getPosition().y),2)) <= 
+		sqrt(((m_pChar.getPlayer().getGlobalBounds().width,2)) + pow((m_pChar.getPlayer().getGlobalBounds().height), 2)) + m_wanderer.getWanderer().getGlobalBounds().height)
+	{
+		destroyWanderer = true;
+		caughtWanderer++;
+		if (caughtWanderer >= 10)
+		{
+			std::cout << "win message" << std::endl;
+		}
+	}
+	
 }
 
 /// <summary>
@@ -121,11 +136,12 @@ void Game::render()
 	forLoopLibrary();
 	m_window.setView(miniMap_view);
 	m_window.draw(mapSprite);
+	m_wanderer.render(m_window, destroyWanderer);
+	m_seeker.render(m_window);
 	m_pChar.render(m_window);
 	m_window.setView(player_view);
 	m_seeker.render(m_window);
-
-	m_wanderer.render(m_window);
+	m_wanderer.render(m_window,destroyWanderer);
 	m_pChar.render(m_window);
 	m_window.display();
 }
@@ -142,6 +158,7 @@ void Game::forLoopLibrary()
 
 			m_window.setView(miniMap_view);
 			
+			
 			//world.render(m_window, i, j);
 			//m_window.setView(player_view);
 			if (world.m_mapHolder.mapDoubleArray[i][j] == 1)
@@ -155,6 +172,14 @@ void Game::forLoopLibrary()
 				if (m_pChar.getBullet().getGlobalBounds().intersects(world.tile[i][j].sprite.getGlobalBounds()))
 				{
 					m_pChar.m_fire = false;
+				}
+				if (m_wanderer.getWanderer().getGlobalBounds().intersects(world.tile[i][j].sprite.getGlobalBounds()))
+				{
+					m_wanderer.bounce();
+				}
+				if (m_seeker.getSeeker().getGlobalBounds().intersects(world.tile[i][j].sprite.getGlobalBounds()))
+				{
+					m_seeker.bounce();
 				}
 
 			}

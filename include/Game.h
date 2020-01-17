@@ -45,6 +45,8 @@ private:
 	sf::Font m_ArialBlackfont; // font used by message
 	sf::Text m_welcomeMessage; // text used for message on screen
 	bool m_exitGame; // control exiting game
+	bool destroyWanderer;	// bool to check if wanderer needs to be destroyed
+	float caughtWanderer;	// counts how many wanderers the player caught
 
 	sf::Texture mapTexture;
 	sf::Sprite mapSprite;
