@@ -37,6 +37,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Predator.cpp" />
     <ClCompile Include="Wanderer.cpp" />
   </ItemGroup>
   <ItemGroup>

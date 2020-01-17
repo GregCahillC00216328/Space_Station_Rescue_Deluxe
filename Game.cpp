@@ -147,7 +147,11 @@ void Game::forLoopLibrary()
 					m_pChar.deflect();
 					std::cout << world.tile[i][i].sprite.getPosition().x << std::endl;
 				}
-				
+				if (m_pChar.getBullet().getGlobalBounds().intersects(world.tile[i][j].sprite.getGlobalBounds()))
+				{
+					m_pChar.m_fire = false;
+				}
+
 			}
 		}
 	}

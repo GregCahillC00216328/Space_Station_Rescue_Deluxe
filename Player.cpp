@@ -12,6 +12,12 @@ Player::~Player()
 }
 void Player::update(double t_deltaTime)
 {
+	if (!playerTexture.loadFromFile("ASSETS/Map/ship.png"))
+	{
+	}
+	playerSprite.setTexture(playerTexture);
+	m_player.setTexture(&playerTexture);
+	dt = t_deltaTime;
 	m_previousPosition = m_player.getPosition();
 	movement(sf::Vector2f(m_player.getPosition().x + cos(m_rotation * DEG_TO_RAD) * m_speed * (t_deltaTime / 1000),
 		m_player.getPosition().y + sin(m_rotation * DEG_TO_RAD) * m_speed * (t_deltaTime / 1000)));
@@ -25,14 +31,31 @@ void Player::update(double t_deltaTime)
 
 void Player::render(sf::RenderWindow& t_window)
 {
+	t_window.draw(m_bullet);
 	t_window.draw(m_player);
 }
 
 void Player::movement(sf::Vector2f const& t_pos)
 {
-	m_player.setSize(sf::Vector2f(40,40));
+	m_player.setSize(sf::Vector2f(20,20));
 	m_player.setOrigin(m_player.getSize().x / 2.0, m_player.getSize().y / 2.0);
+	m_bullet.setSize(sf::Vector2f(5, 5));
+	m_bullet.setOrigin(m_bullet.getSize().x / 2.0, m_bullet.getSize().y / 2.0);
+
 	m_player.setPosition(t_pos);
+	
+	if (!m_fire)
+	{
+		fireDir = t_pos;
+		bulRot = m_rotation;
+		m_bullet.setPosition(t_pos);
+	}
+	else
+	{
+		fireDir = sf::Vector2f(fireDir.x + cos(bulRot * DEG_TO_RAD) * 500 * (dt / 1000),
+			fireDir.y + sin(bulRot * DEG_TO_RAD) * 500 * (dt / 1000));
+		m_bullet.setPosition(fireDir);
+	}
 }
 
 void Player::resetSpeed()
@@ -66,6 +89,10 @@ void Player::handleKeyInput()
 		m_previousSpeed = m_speed;
 		decreaseSpeed();
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		m_fire = true;
+	}
 
 }
 /// <summary>
@@ -97,7 +124,8 @@ void Player::deflect()
 		{
 			m_enableRotation = false;
 			m_player.setPosition(m_previousPosition);
-			// Apply small force in opposite direction of travel.
+			adjustRotation();
+			m_player.setRotation(m_rotation);
 			if (m_previousSpeed < 0)
 			{
 				m_speed = 30;
@@ -146,6 +174,11 @@ sf::RectangleShape Player::getPlayer() const
 	return m_player;
 }
 
+sf::RectangleShape Player::getBullet() const
+{
+	return m_bullet;
+}
+
 
 void Player::takeDamge()
 {
@@ -179,4 +212,9 @@ void Player::adjustRotation()
 			m_rotation = m_previousRotation + 1;
 		}
 	}
+}
+
+void Player::fireFun()
+{
+	
 }
