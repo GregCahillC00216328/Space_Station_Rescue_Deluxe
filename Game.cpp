@@ -122,6 +122,8 @@ void Game::render()
 	
 	m_window.clear();
 	
+<<<<<<< Updated upstream
+=======
 	forLoopLibrary();
 	m_window.setView(miniMap_view);
 	m_window.draw(mapSprite);
