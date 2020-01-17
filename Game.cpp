@@ -19,7 +19,7 @@ Game::Game() :
 	destroyWanderer{false},
 	caughtWanderer{0}
 {
-	
+	m_pred.init(sf::Vector2f(0, 0));
 	m_seeker.initSeeker(m_window);
 	m_wanderer.initWander(m_window);
 	setupFontAndText(); // load font 
@@ -71,7 +71,7 @@ void Game::processEvents()
 	sf::Event newEvent;
 	while (m_window.pollEvent(newEvent))
 	{
-		if ( sf::Event::Closed == newEvent.type) // window message
+		if ( sf::Event::Closed == newEvent.type||m_pChar.getPlayer().getGlobalBounds().intersects(m_pred.getSprites().getGlobalBounds())||destroyWanderer) // window message
 		{
 			m_exitGame = true;
 		}
@@ -107,6 +107,7 @@ void Game::update(sf::Time t_deltaTime)
 	destroyWanderer = m_seeker.withinWorkerDistance(m_wanderer, destroyWanderer);
 	m_pChar.update(t_deltaTime.asMilliseconds());
 	player_view.setCenter(m_pChar.getPosition());
+	m_pred.update(m_pChar.getPosition(),t_deltaTime.asMilliseconds());
 	//m_window.setView(player_view);
 	if (m_exitGame)
 	{
@@ -143,6 +144,7 @@ void Game::render()
 	m_seeker.render(m_window);
 	m_wanderer.render(m_window,destroyWanderer);
 	m_pChar.render(m_window);
+	m_pred.render(m_window);
 	m_window.display();
 }
 

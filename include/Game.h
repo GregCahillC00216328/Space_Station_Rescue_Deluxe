@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "Wanderer.h"
+#include "Predator.h"
 #include "Seeker.h"
 class Game
 {
@@ -26,6 +27,7 @@ public:
 
 private:
 	Seeker m_seeker;
+	Predator m_pred;
 	Player m_pChar;
 	Map world;
 	Wanderer m_wanderer;
