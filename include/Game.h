@@ -13,6 +13,8 @@
 #include "Player.h"
 #include "Map.h"
 #include "Wanderer.h"
+<<<<<<< Updated upstream
+=======
 #include "Seeker.h"
 #include "Predator.h"
 class Game
