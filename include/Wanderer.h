@@ -14,6 +14,9 @@ private:
 	float rotationValue;	// stores the rotation for the direction of the wanderer
 	float rotateSet;	// calculate the rotation in degrees and stores the result here
 	float currentRotation;	// stores current wanderer rotation
+	float screenWidth;	// used to store width of screen
+	float screenHeight;	// used to store height of screen
+	sf::CircleShape m_originWanderCheck;	// used for testing purposes only
 public:
 	Wanderer();	//default constructor
 	~Wanderer();	//destructor
@@ -21,6 +24,8 @@ public:
 	void render(sf::RenderWindow& t_window);	// render window for the wander class
 	void generateNewPoint();	// creates a new point for the ship to wander to
 	void rotateToDirection();	// points wanderer in direction of movement
+	void initWander(sf::RenderWindow &t_window);	// used to initialise the wanderer
+	sf::Vector2f getPosition();
 };
 #endif // WANDERER
 

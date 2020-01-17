@@ -17,6 +17,8 @@ Game::Game() :
 	m_window{ sf::VideoMode::getFullscreenModes()[0], "SFML window", sf::Style::Fullscreen },
 	m_exitGame{false} //when true game will exit
 {
+	m_seeker.initSeeker(m_window);
+	m_wanderer.initWander(m_window);
 	setupFontAndText(); // load font 
 	setupSprite(); // load texture
 }
@@ -97,6 +99,8 @@ void Game::processKeys(sf::Event t_event)
 void Game::update(sf::Time t_deltaTime)
 {
 	m_wanderer.update(t_deltaTime);
+	m_seeker.update(t_deltaTime);
+	m_seeker.withinWorkerDistance(m_wanderer);
 	m_pChar.update(t_deltaTime.asMilliseconds());
 	player_view.setCenter(m_pChar.getPosition());
 	//m_window.setView(player_view);
@@ -119,6 +123,7 @@ void Game::render()
 	m_window.draw(mapSprite);
 	m_pChar.render(m_window);
 	m_window.setView(player_view);
+	m_seeker.render(m_window);
 
 	m_wanderer.render(m_window);
 	m_pChar.render(m_window);

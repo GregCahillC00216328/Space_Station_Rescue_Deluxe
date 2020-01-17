@@ -46,7 +46,7 @@
     <ClCompile Include="Wanderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Predator.cpp">
+    <ClCompile Include="Seeker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,6 +70,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Predator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Seeker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

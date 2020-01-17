@@ -37,7 +37,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Predator.cpp" />
+    <ClCompile Include="Seeker.cpp" />
     <ClCompile Include="Wanderer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +47,7 @@
     <ClInclude Include="include\MapTIle.h" />
     <ClInclude Include="include\Player.h" />
     <ClInclude Include="include\Predator.h" />
+    <ClInclude Include="include\Seeker.h" />
     <ClInclude Include="include\Wanderer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
