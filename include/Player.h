@@ -12,7 +12,7 @@ public:
 	void resetSpeed();
 	void increaseSpeed();
 	void decreaseSpeed();
-
+	void deflect();
 	void increaseRotation();
 	void decreaseRotation();
 

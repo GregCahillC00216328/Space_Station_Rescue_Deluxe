@@ -90,6 +90,27 @@ void Player::decreaseSpeed()
 	}
 }
 
+void Player::deflect()
+{
+	{
+		if (m_speed != 0)
+		{
+			m_enableRotation = false;
+			m_player.setPosition(m_previousPosition);
+			// Apply small force in opposite direction of travel.
+			if (m_previousSpeed < 0)
+			{
+				m_speed = 30;
+			}
+			else
+			{
+				m_speed = -30;
+
+			}
+		}
+	}
+}
+
 /// <summary>
 /// @brief Increases the rotation by 1 degree, wraps to 0 degrees after 359.
 /// </summary>

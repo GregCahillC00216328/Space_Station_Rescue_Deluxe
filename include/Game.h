@@ -32,6 +32,7 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 	
+	void forLoopLibrary();
 	void setupFontAndText();
 	void setupSprite();
 	sf::View player_view;
@@ -43,6 +44,8 @@ private:
 	sf::Text m_welcomeMessage; // text used for message on screen
 	bool m_exitGame; // control exiting game
 
+	sf::Texture mapTexture;
+	sf::Sprite mapSprite;
 
 	
 

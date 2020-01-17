@@ -114,25 +114,43 @@ void Game::render()
 	
 	m_window.clear();
 	
+	forLoopLibrary();
+	m_window.setView(miniMap_view);
+	m_window.draw(mapSprite);
+	m_pChar.render(m_window);
+	m_window.setView(player_view);
+
+	m_wanderer.render(m_window);
+	m_pChar.render(m_window);
+	m_window.display();
+}
+
+void Game::forLoopLibrary()
+{
 	for (int j = 0; j < 22; j++)
 	{
 		for (int i = 0; i < 40; i++)
 		{
-			
+			//m_window.setView(default_view);
 			m_window.setView(player_view);
 			world.render(m_window, i, j);
 
 			m_window.setView(miniMap_view);
-			m_wanderer.render(m_window);
-			m_pChar.render(m_window);
-			world.render(m_window, i, j);
-			m_window.setView(player_view);
 			
+			//world.render(m_window, i, j);
+			//m_window.setView(player_view);
+			if (world.m_mapHolder.mapDoubleArray[i][j] == 1)
+			{
+				
+				if (m_pChar.getPlayer().getGlobalBounds().intersects(world.tile[i][j].sprite.getGlobalBounds()) )
+				{
+					m_pChar.deflect();
+					std::cout << world.tile[i][i].sprite.getPosition().x << std::endl;
+				}
+				
+			}
 		}
 	}
-	m_wanderer.render(m_window);
-	m_pChar.render(m_window);
-	m_window.display();
 }
 
 /// <summary>
@@ -152,7 +170,6 @@ void Game::setupFontAndText()
 	m_welcomeMessage.setOutlineColor(sf::Color::Red);
 	m_welcomeMessage.setFillColor(sf::Color::Black);
 	m_welcomeMessage.setOutlineThickness(3.0f);
-
 }
 
 /// <summary>
@@ -166,7 +183,13 @@ void Game::setupSprite()
 	miniMap_view.setSize(sf::Vector2f(m_window.getSize().x*1.8,m_window.getSize().y*2));
 	miniMap_view.setViewport(sf::FloatRect(0.75f, 0, 0.25f, 0.25f));
 	//miniMap_view.setViewport(sf::FloatRect(viewportOffset, viewportSize));
-	m_pChar.movement(sf::Vector2f(m_window.getSize().x/2,m_window.getSize().y/2));
+	m_pChar.movement(sf::Vector2f(m_window.getSize().x/2-100,m_window.getSize().y/2));
 	default_view = sf::View(sf::FloatRect(0, 0, m_window.getSize().x, m_window.getSize().y));
 	player_view=sf::View(sf::FloatRect(0, 0, m_window.getSize().x/2.5, m_window.getSize().y/2.5));
+
+	if (!mapTexture.loadFromFile("ASSETS/Map/map.png"))
+	{
+	}
+	mapSprite.setTexture(mapTexture);
+	mapSprite.setPosition(0, 0);
 }

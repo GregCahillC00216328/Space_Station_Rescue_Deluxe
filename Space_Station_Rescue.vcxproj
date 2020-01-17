@@ -45,6 +45,7 @@
     <ClInclude Include="include\MapHolder.h" />
     <ClInclude Include="include\MapTIle.h" />
     <ClInclude Include="include\Player.h" />
+    <ClInclude Include="include\Predator.h" />
     <ClInclude Include="include\Wanderer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -11,7 +11,7 @@ public:
 	void init();
 	void render(sf::RenderWindow& window,int i, int j);
 private:
-	sf::Vector2f mapArr[40][20];
+	sf::Vector2f mapArr[40][22];
 	
 
 	
